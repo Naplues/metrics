@@ -1,6 +1,5 @@
 
 use Understand;
-use Encode;
 
 #获取文件句柄
 $filename = "gcc-2.8.0.csv";
@@ -24,5 +23,5 @@ foreach $function ($db->ents("function ~unknown ~unresolved"))
 	print $filehandle $function->metric("CountOutput"), "\n";
 }
 
-close $filehandle or die "不能关闭文件句柄";
-print "成功导出数据.\n";
+close $filehandle or die "Cannot close the file handle\n";
+print "Output Successfuly!\n";
