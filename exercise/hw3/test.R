@@ -116,15 +116,18 @@ get_data <- function() {
 					mauc[i,6], mauc[i,7], mauc[i,8], mauc[i,9], mauc[i,10])
 		m_auc <- rbind(m_auc, nf)
 	}
-	name <- c('naiveBayes', 'svm', 'gbm', 'lda', 'mlp',
-		'randomForest', 'rpart', 'glmnet', 'nnet', 'mulitnom')
+	name <- c('nB', 'svm', 'gbm', 'lda', 'mlp',
+		'rF', 'rpart', 'glm', 'nn', 'mnom')
 	names(m_auc) <- name
+	png(file = "performance.png")
+	boxplot(m_auc)
+	dev.off()
 	m_auc
 }
 
 #e.作CD图比较统计差别
 graph_cd <- function(data) {
-	png(file = "AUC-CD.png")
+	png(file = "CD.png")
 	plotCD(results.matrix = data, alpha = 0.05)
 	dev.off()
 }
@@ -133,7 +136,9 @@ graph_cd <- function(data) {
 graph_algorithm <- function(data) {
 	data <- filterData(data, remove.cols=1)  #过滤数据
 	res <- postHocTest(data, test = "friedman", use.rank=TRUE, correct="bergmann")
+	png(file = "algorithm.png")
 	drawAlgorithmGraph(res$corrected.pval, res$summary)
+	dev.off()
 }
 
 #g.作heatmap图展示模型在测试集上的结果
@@ -157,10 +162,10 @@ metrics <- c('wmc', 'dit', 'noc', 'cbo', 'rfc', 'lcom') #度量指标
 #任务步骤
 calc_statis(features)                 #a.描述性统计信息,输出结果"statis.csv"
 calc_cor(features)                    #b.计算相关系数及显著性统计,输出结果"cor.csv"
-
 make_and_evaluate_model()             #c.构建模型并评估
 
 graph_data <- get_data()                   #获取作图数据
+
 graph_cd(graph_data)                       #e.作CD图
 graph_algorithm(graph_data)                #f.作Algorithm图
 graph_heatmap(graph_data)                  #g.作heatmap图
