@@ -160,12 +160,12 @@ bugs <- data[,24]      # 24列
 metrics <- c('wmc', 'dit', 'noc', 'cbo', 'rfc', 'lcom') #度量指标
 
 #任务步骤
-calc_statis(features)                 #a.描述性统计信息,输出结果"statis.csv"
-calc_cor(features)                    #b.计算相关系数及显著性统计,输出结果"cor.csv"
-make_and_evaluate_model()             #c.构建模型并评估
+#calc_statis(features)                 #a.描述性统计信息,输出结果"statis.csv"
+#calc_cor(features)                    #b.计算相关系数及显著性统计,输出结果"cor.csv"
+#make_and_evaluate_model()             #c.构建模型并评估
 
 graph_data <- get_data()                   #获取作图数据
-
-graph_cd(graph_data)                       #e.作CD图
-graph_algorithm(graph_data)                #f.作Algorithm图
-graph_heatmap(graph_data)                  #g.作heatmap图
+graph_data
+#graph_cd(graph_data)                       #e.作CD图
+#graph_algorithm(graph_data)                #f.作Algorithm图
+#graph_heatmap(graph_data)                  #g.作heatmap图
